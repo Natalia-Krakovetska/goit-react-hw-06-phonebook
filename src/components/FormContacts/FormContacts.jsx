@@ -1,11 +1,16 @@
 import { useState } from 'react';
-import PropTypes from 'prop-types';
 import { Form, FormLabel, FormInput, FormBtn } from './FormContacts.styles';
+import { addContacts } from 'redux/contactsSlice';
+import { getContacts } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
 
-export const FormContacts = ({ onSubmit })=> {
+
+export const FormContacts = ()=> {
   const [name, setName] = useState("");
   const [number, setNumber] = useState("");
 
+  const contacts = useSelector(getContacts);
+  const dispatch = useDispatch();
 
   const handleChange = (event) => {
     const { value, name } = event.target;
@@ -25,7 +30,15 @@ export const FormContacts = ({ onSubmit })=> {
   
     const handleSubmit = (event) => {
       event.preventDefault();
-      onSubmit({ name, number });
+       const alreadyInContacts = contacts.find(
+      item => item.name.toLowerCase() === name.toLowerCase()
+    );
+
+    if (alreadyInContacts) {
+      alert(`${name} is already in contacts.`);
+      return;
+    }
+    dispatch(addContacts(name, number));
       reset();
     };
 
@@ -68,9 +81,6 @@ export const FormContacts = ({ onSubmit })=> {
   );
 };
 
-FormContacts.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  };
 
 
 

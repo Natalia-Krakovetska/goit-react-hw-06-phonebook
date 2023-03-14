@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { ContactsItem, DeleteBtn } from './ContactsListLtem.styles';
-
 export default function ContacsListItem({ name, number, onDelete }){
    return (
    <ContactsItem>

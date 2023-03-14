@@ -1,23 +1,20 @@
-import { useSelector, useDispatch } from "react-redux";
-import { addContacts } from '../redux/contactsSlice';
+  
+import { FormContacts } from './FormContacts/FormContacts';
+import { Filter } from './Filter/Filter';
+import { ContactsList } from './ContactsList/ContactsList';
 
 export const App = () => {
-  const contacts = useSelector(state => state.contacts);
-  console.log(contacts);
-  const dispatch = useDispatch();
-  console.log(addContacts())
   return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
+    <div>
+      <h1>Phonebook</h1>
+      <FormContacts />
+      <h2 style={{ fontSize: '34px', marginBottom: '10px' }}>Contacts</h2>
+
+      <Filter />
+      <ContactsList />
     </div>
   );
 };
+
+
+
